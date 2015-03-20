@@ -146,8 +146,8 @@ treeMod &lt;-<span class="st"> </span><span class="kw">randomForest</span>(class
 confMatrix &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(testing$classe, predTest)
 sampleError &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span>confMatrix$overall[<span class="st">'Accuracy'</span>]
 sampleError</code></pre>
-<pre><code>##  Accuracy 
-## 0.0173322</code></pre>
+<pre><code>##   Accuracy 
+## 0.01648258</code></pre>
 <p>As can be seen, the out of sample error is smaller than the in sample error, almost half the value, which is not what is expected.</p>
 </div>
 </div>
