@@ -1,0 +1,12 @@
+$ cat .gitignore
+
+# Ignore folders
+answers/**
+data/**
+project_report_cache/**
+project
+
+# Ignore file types
+*.R
+*.bib
+*.txt
