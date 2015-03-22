@@ -18,7 +18,7 @@ This report shows the prediction results on data obtained from body sensors worn
 
 # Data
 
-The data consists from a set of measurements obtained from accelerometers, gyroscopes and magnetometers attached to the persons. These sensors are part of inertial measurement units (IMU) mounted in a glove, armband, lumbar bell, and dumbell used by each person. For each unit, 9 variables were measured - one along each axes for the accelerometer, gyroscope and magnetometer. In total there were 36 direct measurements, plus other calculated features corresponding to the mean, variance, standard deviation, max and min values, amplitude, kurtosis and skewness, among other features.  
+The data consists from a set of measurements obtained from accelerometers, gyroscopes and magnetometers attached to the persons. These sensors are part of inertial measurement units (IMU) mounted in a glove, armband, lumbar bell, and dumbell used by each person. For each unit, 9 variables were measured - one along each axis for the accelerometer, gyroscope and magnetometer. In total there were 36 direct measurements, plus other calculated features corresponding to the mean, variance, standard deviation, max and min values, amplitude, kurtosis and skewness, among other features.  
 
 There were 6 persons in the tests, and each performed an exercise several times in 5 possible ways - A, B, C, D, E. 
 
@@ -38,7 +38,7 @@ The total amount of variables and measurements in the data is
 ```{r dataDimension}
 ```
 
-We see that there are 160 columns in the data, and 19622 samples. This is a large amount of data that will take a lot of time to train. In order to reduce the amount of features in the data, we remove the features that are a calculation of other features. According to @velloso2013qualitative, these are the mean, variance, standard deviation, max and min values, amplitude, kurtosis and skewness; plus the timestamps, windows, roll, pitch, yaw and total acceleration. There is also a variable X that is the index of the sample row. All the columns that have any of these words in their names will be removed from the original training data set. This is done with the following code.
+We see that there are 160 columns in the data and 19622 samples. This is a large amount of data that will take a lot of time to train. In order to reduce the amount of features in the data, we remove the features that are a calculation of other features. According to @velloso2013qualitative, these are the mean, variance, standard deviation, max and min values, amplitude, kurtosis and skewness; plus the timestamps, windows, roll, pitch, yaw and total acceleration. There is also a variable X that is the index of the sample row. All the columns that have any of these words in their names will be removed from the original training data set. This is done with the following code.
 
 ```{r removeData}
 ```
@@ -61,19 +61,19 @@ After setting the training and testing sets, a random forest is going to be buil
 
 Regularly, in order to perform cross-validation the data would be divided in k-folds and use one fold as testing data, and the rest of the folds as training data, then loop through the number of trees in the forest and find which number provides the smallest prediction error for all the testing folds. However, because of the way that a random forest is created with the randomForest function, cross-validation is not necessary to perform explicitly.  
 
-According to [Leo Breiman and Adele Cutler](https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm) (the creators of the randomForest algorithm) the randomForest function uses two thirds of the data for training, and a the remaining third for testing. It does this for each new tree added to the forest. The error obtained is called the out-of-bag error, and in this case is equivalent to the in sample error.  
+According to [Leo Breiman and Adele Cutler](https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm) (the creators of the randomForest algorithm) the randomForest function uses two thirds of the data for training, and the remaining third for testing. It does this for each new tree added to the forest. The error obtained is called the out-of-bag error, and in this case is equivalent to the in sample error.  
 
 The following code builds the random forest classifier.
 
 ```{r trainModel, cache = TRUE}
 ```
 
-In order to see how the out-of-bag error changes with the number or trees in the forest, we will make a plot for these parameters. The following code plots the error against the number of trees. 
+In order to see how the out-of-bag error changes with the number of trees in the forest, we will make a plot for these parameters. The following code plots the error against the number of trees. 
 
 ```{r plotError}
 ```
 
-As we can see in the plot, the error decreases with the number of trees in the forest; however, in this case it does not decrease much after 25 trees. Therefore, we will use this values as the number of trees to build the forest.
+As we can see in the plot, the error decreases with the number of trees in the forest; however, in this case it does not decrease much after 25 trees. Therefore, we will use this value as the number of trees to build the forest.
 
 ```{r reTrainModel, cache = TRUE}
 ```
@@ -97,7 +97,7 @@ Having modeled our classifier, we will now use this model with the data provided
 ```{r prepareValidationData}
 ```
 
-Then we predict the `classe` value for the samples in the testing data set. Since we do not have the actual values for the predicted variables, we can not quantify the out of sample error, in this case; however, given the out of sample error obtained in the previous test, it is expected to have an error rate of 0 misclassifications out of 20 samples. 
+Then we predict the `classe` value for the samples in the testing data set. Since we do not have the actual values for the predicted variables, we cannot quantify the out of sample error in this case; however, given the out of sample error obtained in the previous test, it is expected to have an error rate of 0 misclassifications out of 20 samples. 
 
 
 ```{r predictValidationResults}
